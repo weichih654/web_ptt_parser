@@ -130,25 +130,26 @@ class Ptt:
 
         return html[head:tail]
 
-url = ""
-if len(sys.argv) < 3:
-    print sys.argv[0], "[-a/-l] [url]"
-    sys.exit(2)
-else:
-    url = sys.argv[2]
-
-ptt = Ptt()
-if sys.argv[1] == "-l":
-    boardLists = ptt.getBoardLists(url)
-    for p in boardLists["list"]:
-        print p.link, " : ", p.content, " type -> ", p.type
-
-    print "prev = ", boardLists["page_info"].prevPage, " next = ", boardLists["page_info"].nextPage, "oldest = ", boardLists["page_info"].oldestPage, "newest = ", boardLists["page_info"].newestPage
-elif sys.argv[1] == "-r":
-    boardLists = ptt.getBoardListsRange(url, int(sys.argv[3]), int(sys.argv[4]))
-    for p in boardLists:
-        print p.link, " : ", p.content, " type -> ", p.type
-else:
-    articleContent = ptt.getArticleContent(url)
-    print articleContent 
+if __name__ == '__main__':
+    url = ""
+    if len(sys.argv) < 3:
+        print sys.argv[0], "[-a/-l] [url]"
+        sys.exit(2)
+    else:
+        url = sys.argv[2]
+    
+    ptt = Ptt()
+    if sys.argv[1] == "-l":
+        boardLists = ptt.getBoardLists(url)
+        for p in boardLists["list"]:
+            print p.link, " : ", p.content, " type -> ", p.type
+    
+        print "prev = ", boardLists["page_info"].prevPage, " next = ", boardLists["page_info"].nextPage, "oldest = ", boardLists["page_info"].oldestPage, "newest = ", boardLists["page_info"].newestPage
+    elif sys.argv[1] == "-r":
+        boardLists = ptt.getBoardListsRange(url, int(sys.argv[3]), int(sys.argv[4]))
+        for p in boardLists:
+            print p.link, " : ", p.content, " type -> ", p.type
+    else:
+        articleContent = ptt.getArticleContent(url)
+        print articleContent 
 
